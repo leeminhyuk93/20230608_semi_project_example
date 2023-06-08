@@ -1,0 +1,78 @@
+<html layout:decorate="~{layout2}">
+    <div layout:fragment="content" class="container my-3">
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Employee Information</h5>
+                    <form id="editForm" action="/emp/edit" method="post">
+                    
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <td><input style="background-color: grey; font-weight: bold;" type="text" id="employeeId" name="employeeId" th:value="${employee.employeeId}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td><input type="text" name="fullName" th:value="${employee.firstName} + ' ' + ${employee.lastName}">
+                                <span style="margin-left: 10px; color: green;"> 이름을 공백으로 구분하여 작성해주세요. </span></td>
+                                <!-- 다른 부분과 다르게 firstName + lastName의 조합이기 때문에 컨트롤러에서 문자열을 나누어서 다시 객체에 저장한다. -->
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><input type="text" id="email" name="email" th:value="${employee.email}"></td>
+                                
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td><input type="text" id="phoneNumber" name="phoneNumber" th:value="${employee.phoneNumber}"></td>
+                            </tr>
+                            <tr>
+                                <th>Hire Date</th>
+                                <td><input type="date" id="hireDate" name="hireDate" th:value="${employee.hireDate}"></td>
+                            </tr>
+                            <tr>
+                                <th>Job ID</th>
+                                <td>
+                                	<select class="form-control" id="jobId" name="jobId" >
+				                    	<option th:each="job : ${jobList}" th:value="${job.jobId}" th:text="${job.jobTitle}">
+				                    </select>
+				                </td>
+                            </tr>
+                            <tr>
+                                <th>Salary</th>
+                                <td><input type="text" id="salary" name="salary" th:value="${employee.salary}"></td>
+                            </tr>
+                            <tr>
+                                <th>Commission Pct</th>
+                                <td><input type="text" id="commissionPct" name="commissionPct" th:value="${employee.commissionPct}"></td>
+                            </tr>
+                            <tr>
+                                <th>Manager ID</th>
+                                <td><input type="text" style="background-color: grey; font-weight: bold;" id="managerId" name="managerId" th:value="${employee.managerId}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Department ID</th>
+                                <td><input type="text" style="background-color: grey; font-weight: bold;" id="departmentId" name="departmentId" th:value="${employee.departmentId}" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    </form>
+                </div>
+            </div>
+             <div class="text-center mt-3">
+                <a class="btn btn-primary" href="/emp/list">Return to List</a>
+                <a class="btn btn-info" style="color: white;" onclick="editSubmit();">Complete</a>
+                <script>
+                	function editSubmit() {
+                		if(confirm("수정을 완료하시겠습니까?")) {
+                			$("#editForm").submit();
+                		}
+                	}
+        
+                </script>
+            </div>
+        </div>
+    </div>
+</html>

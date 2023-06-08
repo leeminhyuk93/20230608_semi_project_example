@@ -1,0 +1,55 @@
+<html layout:decorate="~{layout2}">
+    <div layout:fragment="content" class="container my-3">
+        <div>
+            <form action="/emp/register" method="post">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="hireDate">Hire Date</label>
+                    <input type="date" class="form-control" id="hireDate" name="hireDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="jobId">Job ID</label>
+                    <select class="form-control" id="jobId" name="jobId">
+                    	<option th:each="job : ${jobList}" th:value="${job.jobId}" th:text="${job.jobTitle}">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="number" class="form-control" id="salary" name="salary" required>
+                </div>
+                <div class="form-group">
+                    <label for="commissionPct">Commission Pct</label>
+                    <input type="number" class="form-control" id="commissionPct" name="commissionPct">
+                </div>
+                <div class="form-group">
+                    <label for="managerId">Manager ID</label>
+                    <select class="form-control" id="managerId" name="managerId">
+                    	<option th:each="manager : ${empList}" th:value="${manager.employeeId}" th:text="${manager.lastName} + ' ' + ${manager.firstName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="departmentId">Department ID</label>
+                    <select class="form-control" id="departmentId" name="departmentId">
+                    	<option th:each="department : ${departmentList}" th:value="${department.departmentId}" th:text="${department.departmentName}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</html>

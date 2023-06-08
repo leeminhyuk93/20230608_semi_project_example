@@ -1,0 +1,49 @@
+<!--  
+	  기존에 'layout.html' 이라고 작성해둔 레이아웃 폼을 작성한 파일이 있다고 하자.
+	  html 태그 부분에는 'layout:decorate=""' 속성을 통해서 부모의 레이아웃 폼을 지정한다. 
+	  
+	  layout.html에는 th:block 이라고 작성한 'th:block layout:fragment="content"' 부분이 있는데 
+	  이는 해당 layout.html을 폼으로 사용하는 문서에서 내용을 작성하고 fragment로 content라는 이름을 설정하고 
+	  그 안에 내용을 작성하면 layout.html에 th:block을 작성한 부분에 해당 내용이 들어가게 된다. 
+	  
+	  레이아웃 폼을 따로 작성해두고 공통적으로 사용할 부분은 미리 작성해두고 
+	  원하는 위치에 블록으로 작성하여 내용을 삽입할 수 있는 기능이다.
+-->
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Hire Date</th>
+                <th>Job ID</th>
+                <th>Salary</th>
+                <th>Commission Pct</th>
+                <th>Manager ID</th>
+                <th>Department ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${list}">
+                <td>
+                    <a th:href="@{/emp/read(employeeId=${employee.employeeId})}">
+                        <span th:text="${employee.employeeId}"></span>
+                    </a>
+                </td>
+                <td><span th:text="${employee.firstName} + ' ' + ${employee.lastName}"></span></td>
+                <td><span th:text="${employee.email}"></span></td>
+                <td><span th:text="${employee.phoneNumber}"></span></td>
+                <td><span th:text="${employee.hireDate}"></span></td>
+                <td><span th:text="${employee.jobId}"></span></td>
+                <td><span th:text="${employee.salary}"></span></td>
+                <td><span th:text="${employee.commissionPct}"></span></td>
+                <td><span th:text="${employee.managerId}"></span></td>
+                <td><span th:text="${employee.departmentId}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</html>
